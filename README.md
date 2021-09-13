@@ -1,2 +1,3 @@
-# CS50x_final_project
+# CS50x Final Project
+
 Dictionary app for viewing fieldwork on the Ryukyuan languages
