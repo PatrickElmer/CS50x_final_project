@@ -4,7 +4,7 @@ This project provides a web interface for viewing fieldwork data from the 1960s 
 
 The Ryukyuan languages are spoken on the Ryukyu Islands in the south of Japan. Together with Japanese, they belong to the Japonic language family. Most of the languages are now endangered with only a few native speakers remaining. Therefore, considerable effort has been undertaken in Japan to preserve the languages through extensive fieldwork.
 
-This project digitizes fieldwork data that were publish in 1966 by Hirayama, Ōshima and Nakamoto, containing the 630 vocabulary entries from 13 Ryukyuan languages and the Kagoshima dialect of southern Japan, in total more than 8,000 words. (Dtailed bibliographic information is contained in the app).
+This project digitizes fieldwork data that were publish in 1966 by Hirayama, Ōshima and Nakamoto, containing the 630 vocabulary entries from 13 Ryukyuan languages and the Kagoshima dialect of southern Japan, in total more than 8,000 words. (Detailed bibliographic information is contained in the app).
 
 ## Usage
 
@@ -36,14 +36,44 @@ Only a small subset of the complete data is uploaded on Github. This is to prote
 
 These are the timestamps in the video:
 
-- 0:03 App start
-- 0:04 English search
-- 0:12 Dark mode
-- 0:18 Continuing search
-- 0:22 Normal mode
-- 0:25 Mobile view
-- 0:32 Minimize map
-- 0:33 Desktop view
-- 0:39 Romanized Japanaese search (case insensitive)
-- 0:48 Japanese search
-- 0:50 Selecting from dropdown
+- App start
+
+The app is running with the Live Server extension in VS Code and can be accessed by going to `localhost:5500`.
+
+- English search
+
+First, the search functionality for English is displayed by searching for the dictionary entry "fire". Note that the searchtext is highlighted in the entries of the dropdown menu.
+
+After selecting an entry from the dropdown, the language data is displayed in a table on the left side, with a scan of the original data on the right.
+
+- Dark mode
+
+The app automatically mirrors light or dark mode from the host computers system.
+
+- Continuing search
+
+English search can be continued by clicking back into the input field and selecting another entry from the dropdown menu.
+
+- Normal mode
+
+Dark mode can be disabled again through the system settings.
+
+- Mobile view
+
+The app is responsive and also works on mobile screens. To show this functionality, the window width is decreased to the smallest possible size. The image is now displayed below the table with the language data.
+
+- Minimize map
+
+Once the user is familiar with the location of all languages, the map can be hidden by clicking on the button below it.
+
+- Desktop view
+
+In desktop mode, the width of the app is restricted through a container the keep all the data organized and readable.
+
+- Romanized Japanaese search (case insensitive)
+
+The dictionary can also be searched by typing the romanized version of the Japanese gloss. Note that this is case insensitive, and both uppercase and lowercase letters are allowed.
+
+- Japanese search
+
+Searches can also be performed in Japanese, which is identical to the original data.
