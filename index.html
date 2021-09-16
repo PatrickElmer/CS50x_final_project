@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/logo.svg" type="image/x-icon" />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/milligram.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script
+    defer
+    src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script
+    defer
+    src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    ></script>
+    <script defer src="js/leaflet.js"></script>
+
+    <title>Ryūkyūan Dictionary</title>
+  </head>
+  <body>
+    <div x-data="{ showMap: true }">
+      <div id="mapid" x-show="showMap"></div>
+      <div class="map-toggle" @click="showMap = !showMap">
+        <i x-show="!showMap" data-feather="map"></i>
+        <i x-show="showMap" data-feather="chevron-up"></i>
+      </div>
+    </div>
+    <div
+      class="container pt1 pb1"
+      x-data="{
+        language: {},
+        dict: {},
+        info: {},
+        searchterms: [],
+        searchresults: [],
+        view: 0,
+        showBox: false,
+        q: '',
+        lastSearch: '',
+        searchterm: '',
+        selected: ''
+      }"
+      x-init="
+        language = await (await fetch('json/languages.json')).json();
+        dict = await (await fetch('json/dictionary.json')).json();
+        searchterms = await (await fetch('json/searchterms.json')).json();
+        info = await (await fetch('json/info.json')).json();
+      "
+    >
+      <div class="search">
+        <label for="text" class="fs10 dn"
+          >Search in English, Japanese or Rōmanji...</label
+        >
+        <input
+          @keyup="search"
+          @click.away="showBox = false"
+          @focus="showBox = searchresults.length"
+          x-model="q"
+          type="text"
+          name="text"
+          class="m0 p0 brt pl1"
+          :class="showBox && searchresults.length ? '' : 'br'"
+          placeholder="Search in English, Japanese or Rōmanji"
+          autocomplete="off"
+        />
+        <div x-show="showBox" class="results m0">
+          <template x-for="result in searchresults">
+            <div
+              x-html="result.replace(q.toLowerCase(), `<span class='primary';>${q.toLowerCase()}</span>`)"
+              @click="selected = searchterms[result];"
+            ></div>
+          </template>
+        </div>
+      </div>
+      <div x-show="!selected.length">
+        <p class="b mb1 mt4">Proto-Ryūkyūan language data</p>
+        <p>
+          Hirayama, Teruo 平山 輝男; Ōshima, Ichirō 大島 一郎; Nakamoto,
+          Masachie 中本 正智 (1966).
+          <em>Ryūkyū Hōgen No Sōgōteki Kenkyū</em> 琉球方言の総合的研究 [A
+          Comprehensive Study of the Ryūkyūan Dialects]. Tokyo: Meiji Shoin.
+          <a href="https://ci.nii.ac.jp/ncid/BN0609092X/" target="_blank"
+            >[Link]</a
+          >
+        </p>
+        <p class="b mb1 mt2">The World Loanword Database (WOLD)</p>
+        <p>
+          Haspelmath, Martin; Uri, Tadmor (2009).
+          <em>Loanwords in the World’s Languages: A Comparative Handbook</em>.
+          Berlin: De Gruyter Mouton.
+          <a href="https://wold.clld.org/" target="_blank">[Link]</a>
+        </p>
+      </div>
+      <div x-show="selected.length" class="info">
+        <template x-if="selected">
+          <h3 class="mt2">
+            <span x-text="info[selected]['romaji']" class="i"></span>
+            <span x-text="info[selected]['kanji']" class="ml1 mr1"></span>
+            <template x-if="info[selected]['meaning']">
+              <span x-text="`‘${info[selected]['meaning']}’`"></span>
+            </template>
+          </h3>
+        </template>
+        <template x-if="selected">
+          <div x-show="info[selected]['rank']">
+            WOLD Score:
+            <span x-text="info[selected]['score'].toFixed(3)" class="b"></span>
+            <span
+              x-text="`(Rank ${info[selected]['rank']})`"
+              class="fs15"
+            ></span>
+          </div>
+        </template>
+        <template x-if="selected">
+          <div x-show="info[selected]['rank']" class="fs13">
+            Unborrowed Score:
+            <span x-text="info[selected]['unborrowed'].toFixed(3)"></span>, Age
+            Score: <span x-text="info[selected]['age'].toFixed(3)"></span>,
+            Simplicity Score:
+            <span x-text="info[selected]['simplicity'].toFixed(3)"></span>
+          </div>
+        </template>
+        <template x-if="selected">
+          <div class="flex-sections">
+            <div class="table">
+              <table class="mt2 p1">
+                <tr>
+                  <th>Language</th>
+                  <th>Word</th>
+                </tr>
+                <template x-for="(entry, i) in dict[selected]">
+                  <tr>
+                    <td>
+                      <span x-text="language.transcription[i]"></span>
+                    </td>
+                    <td x-text="dict[selected][i]"></td>
+                  </tr>
+                </template>
+              </table>
+            </div>
+            <div class="pl1 pt4">
+              <img class="scan m0" :src="`img/hirayama1966/${selected}.png`" :alt="selected"></span>
+              <p class="ar fs12">
+                Source: Hirayama <i>et al</i>. (1966:
+                <span x-text="280 + Math.floor((info[selected]['nr'] - 1) / 4)"
+                  ></span
+                >)
+              </p>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>

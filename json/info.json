@@ -1,0 +1,62 @@
+{
+   "1.1.23": {
+      "romaji": "kyō",
+      "kanji": "今日",
+      "meaning": "today",
+      "rank": 203,
+      "score": 0.628,
+      "unborrowed": 0.952,
+      "age": 0.845,
+      "simplicity": 0.781,
+      "nr": 23,
+      "sort": 2326
+   },
+   "1.4.5": {
+      "romaji": "maki",
+      "kanji": "薪",
+      "meaning": "the firewood",
+      "rank": 81,
+      "score": 0.711,
+      "unborrowed": 0.951,
+      "age": 0.89,
+      "simplicity": 0.84,
+      "nr": 157,
+      "sort": 792
+   },
+   "1.4.71": {
+      "romaji": "katana",
+      "kanji": "刀",
+      "meaning": "the sword",
+      "rank": 416,
+      "score": 0.433,
+      "unborrowed": 0.554,
+      "age": 0.832,
+      "simplicity": 0.939,
+      "nr": 223,
+      "sort": 5091
+   },
+   "1.5.35": {
+      "romaji": "hi",
+      "kanji": "火",
+      "meaning": "the fire",
+      "rank": 1,
+      "score": 0.903,
+      "unborrowed": 0.965,
+      "age": 0.941,
+      "simplicity": 0.995,
+      "nr": 272,
+      "sort": 1
+   },
+   "1.5.38": {
+      "romaji": "hi",
+      "kanji": "日",
+      "meaning": "the day(1)",
+      "rank": 101,
+      "score": 0.694,
+      "unborrowed": 0.861,
+      "age": 0.888,
+      "simplicity": 0.909,
+      "nr": 275,
+      "sort": 1034
+   }
+}
