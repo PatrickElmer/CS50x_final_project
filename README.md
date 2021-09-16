@@ -47,8 +47,3 @@ These are the timestamps in the video:
 - 0:39 Romanized Japanaese search (case insensitive)
 - 0:48 Japanese search
 - 0:50 Selecting from dropdown
-
-IMPORTANT:
-
-Change of entry `1.5.37` (天)!
-Rōmaji was changed from 'ten' to 'ama' in the `info.json` and `searchterms.json` files, to avoid key conflict with `tō とお ‘ten’`.
